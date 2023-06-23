@@ -51,7 +51,7 @@ async function main() {
     1,
     "ipfs://bafkreig67hed5yrzx7kfo25aasyyqyqjmvzm4olkbpkstcn4wsf5nap2ay",
   ]);
-  const nftAddress = "0x422F7De4598076B931502ddC247Cd6db317d6B79";
+  const nftAddress = "0xcfF6A7cb4aD4c7a1d22497a22d21C86911226a34";
 
   const txs = [];
   const tx1 = {
