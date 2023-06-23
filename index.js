@@ -31,6 +31,7 @@ async function main() {
         providerUrl: process.env.RPC_URL,
         networkCheckTimeout: 10000,
         timeoutBlocks: 200,
+        allowUnlimitedContractSize: true,
       },
     ],
   });
@@ -41,22 +42,22 @@ async function main() {
   const erc721Interface = new utils.Interface(JSON.stringify(ERC_721_ABI));
   const data1 = erc721Interface.encodeFunctionData("safeMint", [
     "0xea6a5858e05d74173ad58f8843b59e98c971aa5d",
-    2,
+    0,
     "ipfs://bafkreigvmahwkhdzcwldhv3uoqur3727o24lo4n5e3dqwd5gmyag3igutu",
   ]);
 
   const data2 = erc721Interface.encodeFunctionData("safeMint", [
     "0x9eb17A51380D7C2f5aC17f640809bbD08174ec65",
-    4,
-    "",
+    1,
+    "ipfs://bafkreig67hed5yrzx7kfo25aasyyqyqjmvzm4olkbpkstcn4wsf5nap2ay",
   ]);
-  const nftAddress = "0xc83b0bD814D82e20D769f9a632C33E6c468a1F53";
+  const nftAddress = "0x422F7De4598076B931502ddC247Cd6db317d6B79";
 
   const txs = [];
   const tx1 = {
     to: nftAddress,
     data: data1,
-    gasLimit: 1000000,
+    gasLimit: 250000,
   };
 
   txs.push(tx1);
@@ -64,21 +65,10 @@ async function main() {
   const tx2 = {
     to: nftAddress,
     data: data2,
-    gasLimit: 1000000,
+    gasLimit: 250000,
   };
 
   txs.push(tx2);
-
-  // Transaction events subscription
-  smartAccount.on("txHashGenerated", (response) => {
-    console.log("txHashGenerated event received via emitter", response);
-  });
-  smartAccount.on("txMined", (response) => {
-    console.log("txMined event received via emitter", response);
-  });
-  smartAccount.on("error", (response) => {
-    console.log("error event received via emitter", response);
-  });
 
   // Sending transaction
   const txResponse = await smartAccount.sendTransactionBatch({
