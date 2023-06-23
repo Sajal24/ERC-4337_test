@@ -29,6 +29,8 @@ async function main() {
         chainId: ChainId.POLYGON_MUMBAI,
         dappAPIKey: process.env.DAPP_API_KEY,
         providerUrl: process.env.RPC_URL,
+        networkCheckTimeout: 10000,
+        timeoutBlocks: 200,
       },
     ],
   });
@@ -40,7 +42,7 @@ async function main() {
   const data1 = erc721Interface.encodeFunctionData("safeMint", [
     "0xea6a5858e05d74173ad58f8843b59e98c971aa5d",
     2,
-    "",
+    "ipfs://bafkreigvmahwkhdzcwldhv3uoqur3727o24lo4n5e3dqwd5gmyag3igutu",
   ]);
 
   const data2 = erc721Interface.encodeFunctionData("safeMint", [
