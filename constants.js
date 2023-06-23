@@ -442,3 +442,5 @@ const ERC_721_ABI = [
     type: "function",
   },
 ];
+
+module.exports = { ERC_721_ABI };
